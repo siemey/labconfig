@@ -1,2 +1,2 @@
 # labconfig
-Configuration scrips for virtual Linux labs
+Configuration scripts for virtual Linux labs
