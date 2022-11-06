@@ -1,0 +1,38 @@
+#!/bin/bash
+# Script to configure a fresh Ubuntu image ready for labs
+#
+clear
+echo "Preparing the new Ubuntu image for use..."
+echo
+
+# Remove MOTD and banners
+# Disable MOTD
+sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
+echo "MOTD: MOTD has been disabled..."
+echo
+# Remove banner files
+rm -f /etc/update-motd.d/10-help-text
+rm -f /etc/update-motd.d/50-motd-news
+rm -f /etc/update-motd.d/80-livepatch
+echo "MOTD: Banner files have been deleted..."
+echo
+
+# Set interface colours
+if grep -Fxq "$LS_COLORS" ~/.bashrc
+  then
+    echo "LS_COLORS: Colour changes already made..."
+  else
+    echo "LS_COLORS=\$LS_COLORS:'di=0;36' ; export LS_COLORS" >> ~/.bashrc
+    echo "LS_COLORS: UI colours have been fixed..."
+fi
+echo
+
+# Fix login screen messages
+sed -i 's/#kernel.printk/kernel.printk/g' /etc/sysctl.conf
+sysctl -p
+echo "SYSCTL: Kernel messages supressed from login screen..."
+echo
+
+echo "Done!"
+echo
+
