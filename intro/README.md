@@ -1,4 +1,4 @@
-## Node names and netwoprk config
+## Node names and network config
 
 Version 1 (Jan-23)
 
